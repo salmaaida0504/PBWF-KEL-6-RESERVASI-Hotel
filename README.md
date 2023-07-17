@@ -1,3 +1,10 @@
+## Kelompok 6 - PBWF Prak - Website Reservasi Hotel
+<h2>Nama Kelompok</h2>
+<ul>
+    <o1>1. Salma Aida Yasmi (434221037)</o1>
+    <o1>2. Fiqhi Nadya Roja Effendi (434221055)</o1>
+</ul>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
