@@ -8,17 +8,28 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style type="text/css">
+        * {
+            scroll-behavior: smooth!important;
+            font-family:Google Sans;
+        }
+    </style>
+
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div id="app" class="bg-white">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -37,6 +48,13 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
+                                <li class="nav-item">
+                                    <a class="nav-link px-md-4 text-dark" href="{{ route('home') }}">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-md-4 text-dark" href="{{ route('home').'#room' }}">Room List</a>
+                                </li>
+
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -49,6 +67,34 @@
                                 </li>
                             @endif
                         @else
+                            @if (Auth::user()->role == 'admin')
+                                <li class="nav-item">
+                                    <a class="nav-link px-md-4 text-dark" href="{{ route('dashboard') }}">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-md-4 text-dark" href="{{ route('booking') }}">Bookings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-md-4 text-dark" href="{{ route('facility') }}">Facilities</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-md-4 text-dark" href="{{ route('room') }}">Rooms</a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->role == 'user')
+                                <li class="nav-item">
+                                    <a class="nav-link px-md-4 text-dark" href="{{ route('home') }}">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-md-4 text-dark" href="{{ route('home').'#room' }}">Room List</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-md-4 text-dark" href="{{ route('home.detail') }}">Bookings Detail</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-md-4 text-dark" href="{{ route('home.myroom') }}">My Rooms</a>
+                                </li>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -75,6 +121,10 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="p-3 bg-dark text-white text-center mt-5">
+            Copyright &copy;2023 SQHotel - UAS PBWF Praktikum - All Rights Reserved
+        </footer>
     </div>
 </body>
 </html>
