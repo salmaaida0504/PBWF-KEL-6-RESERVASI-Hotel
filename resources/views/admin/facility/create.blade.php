@@ -17,11 +17,11 @@
                     <form method="post" action="{{ route('facility.store') }}">
                         @csrf
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" class="form-control">
                         </div>
                         <div class="form-group">
-                            <a href="{{ route('facility') }}" class="btn btn-outline-primary mr-2">Back</a>
+                            <a href="{{ route('facility.index') }}" class="btn btn-outline-primary mr-2">Back</a>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>

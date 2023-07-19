@@ -18,11 +18,11 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ $facility->name }}">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" class="form-control" value="{{ $facility->name }}">
                         </div>
                         <div class="form-group">
-                            <a href="{{ route('facility') }}" class="btn btn-outline-primary mr-2">Back</a>
+                            <a href="{{ route('facility.index') }}" class="btn btn-outline-primary mr-2">Back</a>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>

@@ -15,8 +15,8 @@ class RoomController extends Controller
     }
 
     public function create(){
-        $facility = Facility::orderBy('name', 'ASC')->get();
-        return view('admin.room.create', compact('facility'))->with('i');
+        $facilities = Facility::all();
+        return view('room.create', compact('facilities'));
     }
 
     public function store(Request $request){
@@ -87,9 +87,10 @@ class RoomController extends Controller
     }
 
     public function edit($id){
-        $feature = Feature::with('facility')->where('room_id', $id)->get();
         $room = Room::findOrFail($id);
-        return view('admin.room.edit', compact('room', 'feature'))->with('i');
+        $facilities = Facility::all();
+        $selectedFacilities = $room->features->pluck('facility_id')->toArray();
+        return view('room.edit', compact('room', 'facilities', 'selectedFacilities'));
     }
 
     public function update(Request $request, $id){

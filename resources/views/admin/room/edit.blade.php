@@ -18,64 +18,56 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ $room->name }}">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" class="form-control" value="{{ $room->name }}">
                         </div>
                         <div class="form-group">
-                            <label>Image</label>
+                            <label for="img">Image</label>
                             <label for="img"><img height="350" width="100%" src="{{ asset('img/'.$room->image) }}"></label>
-                            <input type="file" id="img" name="image" class="form-control p-1" value="{{ $room->image }}">
+                            <input type="file" id="img" name="image" class="form-control p-1">
                         </div>
                         <div class="form-group">
-                            <label>Price</label>
-                            <input type="number" name="price" class="form-control" value="{{ $room->price }}">
+                            <label for="price">Price</label>
+                            <input type="number" name="price" id="price" class="form-control" value="{{ $room->price }}">
                         </div>
                         <div class="form-group">
                             <label>Facilities</label>
                             <div class="border p-2">
-                                @foreach($feature as $f)
-                                @if($f->facility_id == $f->facility->id && $f->status == 1)
-                                <input type="checkbox" checked name="facility_id{{ ++$i }}" class="my-2 mr-1" value="{{ $f->facility->id }}"> {{ $f->facility->name }}<br>
-                                @else
-                                <input type="checkbox" name="facility_id{{ ++$i }}" class="my-2 mr-1" value="{{ $f->facility->id }}"> {{ $f->facility->name }}<br>
-                                @endif
+                                @foreach($facilities as $facility)
+                                <input type="checkbox" name="facility_id[]" class="my-2 mr-1" value="{{ $facility->id }}" {{ in_array($facility->id, $selectedFacilities) ? 'checked' : '' }}> {{ $facility->name }}<br>
                                 @endforeach
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Quantity</label>
-                            <select name="quantity" class="form-control">
+                            <label for="quantity">Quantity</label>
+                            <select name="quantity" id="quantity" class="form-control">
                                 @for($j=1; $j<=5; $j++)
-                                @if($room->quantity == $j)
-                                <option selected value="{{ $j }}">{{ $j }} Person</option>
-                                @else
-                                <option value="{{ $j }}">{{ $j }} Person</option>
-                                @endif
+                                <option value="{{ $j }}" {{ $room->quantity == $j ? 'selected' : '' }}>{{ $j }} Person</option>
                                 @endfor
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Type</label>
-                            <select name="type" class="form-control">
-                                <option <?php if ($room->type == 'Personal'){echo 'selected';}?> value="Personal">Personal</option>
-                                <option <?php if ($room->type == 'Couple'){echo 'selected';}?> value="Couple">Couple</option>
-                                <option <?php if ($room->type == 'Family'){echo 'selected';}?> value="Family">Family</option>
-                                <option <?php if ($room->type == 'Small'){echo 'selected';}?> value="Small">Small</option>
-                                <option <?php if ($room->type == 'Medium'){echo 'selected';}?>value="Medium">Medium</option>
-                                <option <?php if ($room->type == 'Large'){echo 'selected';}?> value="Large">Large</option>
+                            <label for="type">Type</label>
+                            <select name="type" id="type" class="form-control">
+                                <option value="Personal" {{ $room->type == 'Personal' ? 'selected' : '' }}>Personal</option>
+                                <option value="Couple" {{ $room->type == 'Couple' ? 'selected' : '' }}>Couple</option>
+                                <option value="Family" {{ $room->type == 'Family' ? 'selected' : '' }}>Family</option>
+                                <option value="Small" {{ $room->type == 'Small' ? 'selected' : '' }}>Small</option>
+                                <option value="Medium" {{ $room->type == 'Medium' ? 'selected' : '' }}>Medium</option>
+                                <option value="Large" {{ $room->type == 'Large' ? 'selected' : '' }}>Large</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Class</label>
-                            <select name="class" class="form-control">
-                                <option <?php if ($room->class == 'S'){echo 'selected';}?> value="S">S</option>
-                                <option <?php if ($room->class == 'A'){echo 'selected';}?> value="A">A</option>
-                                <option <?php if ($room->class == 'B'){echo 'selected';}?> value="B">B</option>
-                                <option <?php if ($room->class == 'C'){echo 'selected';}?> value="C">C</option>
+                            <label for="class">Class</label>
+                            <select name="class" id="class" class="form-control">
+                                <option value="S" {{ $room->class == 'S' ? 'selected' : '' }}>S</option>
+                                <option value="A" {{ $room->class == 'A' ? 'selected' : '' }}>A</option>
+                                <option value="B" {{ $room->class == 'B' ? 'selected' : '' }}>B</option>
+                                <option value="C" {{ $room->class == 'C' ? 'selected' : '' }}>C</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <a href="{{ route('room') }}" class="btn btn-outline-primary mr-2">Back</a>
+                            <a href="{{ route('room.index') }}" class="btn btn-outline-primary mr-2">Back</a>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>

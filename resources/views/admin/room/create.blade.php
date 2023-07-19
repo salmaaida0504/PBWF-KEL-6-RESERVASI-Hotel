@@ -17,36 +17,36 @@
                     <form method="post" enctype="multipart/form-data" action="{{ route('room.store') }}">
                         @csrf
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Image</label>
-                            <input type="file" name="image" class="form-control p-1">
+                            <label for="image">Image</label>
+                            <input type="file" name="image" id="image" class="form-control p-1">
                         </div>
                         <div class="form-group">
-                            <label>Price</label>
-                            <input type="number" name="price" class="form-control">
+                            <label for="price">Price</label>
+                            <input type="number" name="price" id="price" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Facilities</label>
                             <div class="border p-2">
-                                @foreach($facility as $f)
-                                <input type="checkbox" name="facility_id{{ ++$i }}" class="my-2 mr-1" value="{{ $f->id }}"> {{ $f->name }}<br>
+                                @foreach($facilities as $facility)
+                                <input type="checkbox" name="facility_id[]" class="my-2 mr-1" value="{{ $facility->id }}"> {{ $facility->name }}<br>
                                 @endforeach
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Quantity</label>
-                            <select name="quantity" class="form-control">
+                            <label for="quantity">Quantity</label>
+                            <select name="quantity" id="quantity" class="form-control">
                                 @for($j=1; $j<=5; $j++)
                                 <option value="{{ $j }}">{{ $j }} Person</option>
                                 @endfor
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Type</label>
-                            <select name="type" class="form-control">
+                            <label for="type">Type</label>
+                            <select name="type" id="type" class="form-control">
                                 <option value="Personal">Personal</option>
                                 <option value="Couple">Couple</option>
                                 <option value="Family">Family</option>
@@ -56,8 +56,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Class</label>
-                            <select name="class" class="form-control">
+                            <label for="class">Class</label>
+                            <select name="class" id="class" class="form-control">
                                 <option value="S">S</option>
                                 <option value="A">A</option>
                                 <option value="B">B</option>
@@ -65,7 +65,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <a href="{{ route('room') }}" class="btn btn-outline-primary mr-2">Back</a>
+                            <a href="{{ route('room.index') }}" class="btn btn-outline-primary mr-2">Back</a>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>

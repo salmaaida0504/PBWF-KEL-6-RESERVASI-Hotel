@@ -11,46 +11,74 @@ class DashboardController extends Controller
     //
     public function index()
     {
-        $date = date('Y-m-d H:i:s', strtotime(now()));
-        $room = Room::count();
-        $booked = Booking::with('room')->orderBy('created_at', 'ASC')->where('check_out', '>=', $date)->count();
-        $avalaible = Booking::with('room')->orderBy('created_at', 'ASC')->where('check_out', '<', $date)->count();
+        $date = now()->format('Y-m-d H:i:s');
+        $roomCount = Room::count();
+        $bookedCount = Booking::where('check_out', '>=', $date)->count();
+        $availableCount = Booking::where('check_out', '<', $date)->count();
 
-        if ($booked == 0) {
-            $booked = '0';
-        }
-        if ($room == 0) {
-            $room = '0';
-        }
-        if ($avalaible == 0) {
-            $avalaible = '0';
-        }
-
-        return view('admin.dashboard.index', compact('room', 'booked', 'avalaible'))->with('i');
+        return view('admin.dashboard.index', compact('roomCount', 'bookedCount', 'availableCount'));
     }
 
     public function create(){
-
+        return view('admin.dashboard.create');
     }
 
     public function store(Request $request){
+        $data = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
 
+        $room = Room::create($data);
+
+        return redirect()->route('dashboard.index')->with('success', 'Room created successfully.');
     }
 
     public function show($id){
+        $room = Room::find($id);
 
+        return view('admin.dashboard.show', compact('room'));
     }
 
     public function edit($id){
+        $room = Room::find($id);
 
+        if (!$room) {
+            return redirect()->route('dashboard.index')->with('error', 'Room not found.');
+        }
+
+        return view('admin.dashboard.edit', compact('room'));
     }
 
     public function update(Request $request, $id){
+        $room = Room::find($id);
 
+    if (!$room) {
+        return redirect()->route('dashboard.index')->with('error', 'Room not found.');
+    }
+
+    $data = $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+        // tambahkan validasi lainnya
+    ]);
+
+    $room->update($data);
+
+    return redirect()->route('dashboard.index')->with('success', 'Room updated successfully.');
     }
 
     public function destroy($id){
-        
+        $room = Room::find($id);
+
+    if (!$room) {
+        return redirect()->route('dashboard.index')->with('error', 'Room not found.');
     }
 
+    $room->delete();
+
+    return redirect()->route('dashboard.index')->with('success', 'Room deleted successfully.');
 }
+    }
+
+

@@ -21,13 +21,13 @@
                                 <th>Name</th>
                                 <th>Action</th>
                             </tr>
-                            @foreach($room as $r)
+                            @foreach($rooms as $room)
                             <tr>
                                 <td class="pt-3">{{ ++$i }}</td>
-                                <td class="pt-3">{{ $r->name }}</td>
+                                <td class="pt-3">{{ $room->name }}</td>
                                 <td>
-                                    <a class="btn btn-success mr-2" href="{{ route('room.edit', $r->id) }}">Edit</a>
-                                    <a class="btn btn-danger" href="{{ route('room.delete', $r->id) }}">Delete</a>
+                                    <a class="btn btn-success mr-2" href="{{ route('room.edit', $room->id) }}">Edit</a>
+                                    <a class="btn btn-danger" href="{{ route('room.delete', $room->id) }}">Delete</a>
                                 </td>
                             </tr>
                             @endforeach

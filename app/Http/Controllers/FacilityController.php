@@ -9,9 +9,8 @@ class FacilityController extends Controller
 {
     //
     public function index(){
-        $facility = Facility::orderBy('name', 'ASC')->get();
-
-        return view('admin.facility.index', compact('facility'))->with('i');
+        $facilities = Facility::all();
+    return view('facility.index', compact('facilities'));
     }
 
     public function create(){
@@ -36,8 +35,7 @@ class FacilityController extends Controller
 
     public function edit($id){
         $facility = Facility::findOrFail($id);
-
-        return view('admin.facility.edit', compact('facility'))->with('i');
+        return view('facility.edit', compact('facility'));
     }
     
     public function update(Request $request, $id){

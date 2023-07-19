@@ -23,17 +23,17 @@
                                 <th>Check Out</th>
                                 <th>Action</th>
                             </tr>
-                            @foreach($booking as $b)
+                            @foreach($bookings as $booking)
                             <tr>
-                                <td class="pt-3">{{ ++$i }}</td>
-                                <td class="pt-3">{{ $b->room->name }}</td>
-                                <td class="pt-3">{{ date('d F Y', strtotime($b->check_in)) }}</td>
-                                <td class="pt-3">{{ date('d F Y', strtotime($b->check_out)) }}</td>
+                                <td class="pt-3">{{ ++$loop->index }}</td>
+                                <td class="pt-3">{{ $booking->room->name }}</td>
+                                <td class="pt-3">{{ date('d F Y', strtotime($booking->check_in)) }}</td>
+                                <td class="pt-3">{{ date('d F Y', strtotime($booking->check_out)) }}</td>
                                 <td>
-                                    @if($b->check_out > now())
+                                    @if($booking->check_out > now())
                                     <p class="btn btn-success">Booked</p>
                                     @else
-                                    <a class="btn btn-danger" href="{{ route('booking.delete', $b->id) }}">Delete</a>
+                                    <a class="btn btn-danger" href="{{ route('booking.delete', $booking->id) }}">Delete</a>
                                     @endif
                                 </td>
                             </tr>

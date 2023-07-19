@@ -39,22 +39,39 @@ Auth::routes();
 //Admin page
 Route::prefix('/admin')->middleware(['auth', 'cekrole:admin'])->group(function(){
     //Dashboard
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     //Room
-    Route::get('/room', [RoomController::class, 'index'])->name('room');
+	Route::get('/room', [RoomController::class, 'index'])->name('room.index');
 	Route::get('/room/create', [RoomController::class, 'create'])->name('room.create');
-	Route::post('/room/store', [RoomController::class, 'store'])->name('room.store');
-	Route::get('/room/edit/{id}', [RoomController::class, 'edit'])->name('room.edit');
-	Route::put('/room/update/{id}', [RoomController::class, 'update'])->name('room.update');
-	Route::get('/room/delete/{id}', [RoomController::class, 'destroy'])->name('room.delete');
+	Route::post('/room', [RoomController::class, 'store'])->name('room.store');
+	Route::get('/room/{id}/edit', [RoomController::class, 'edit'])->name('room.edit');
+	Route::put('/room/{id}', [RoomController::class, 'update'])->name('room.update');
+	Route::delete('/room/{id}', [RoomController::class, 'destroy'])->name('room.delete');
+
+
+
+    // Route::get('/room', [RoomController::class, 'index'])->name('room');
+	// Route::get('/room/create', [RoomController::class, 'create'])->name('room.create');
+	// Route::post('/room/store', [RoomController::class, 'store'])->name('room.store');
+	// Route::get('/room/edit/{id}', [RoomController::class, 'edit'])->name('room.edit');
+	// Route::put('/room/update/{id}', [RoomController::class, 'update'])->name('room.update');
+	// Route::get('/room/delete/{id}', [RoomController::class, 'destroy'])->name('room.delete');
     //Facility
-    Route::get('/facility', [FacilityController::class, 'index'])->name('facility');
+	Route::get('/facility', [FacilityController::class, 'index'])->name('facility.index');
 	Route::get('/facility/create', [FacilityController::class, 'create'])->name('facility.create');
-	Route::post('/facility/store', [FacilityController::class, 'store'])->name('facility.store');
-	Route::get('/facility/edit/{id}', [FacilityController::class, 'edit'])->name('facility.edit');
-	Route::put('/facility/update/{id}', [FacilityController::class, 'update'])->name('facility.update');
-	Route::get('/facility/delete/{id}', [FacilityController::class, 'destroy'])->name('facility.delete');
+	Route::post('/facility', [FacilityController::class, 'store'])->name('facility.store');
+	Route::get('/facility/{id}/edit', [FacilityController::class, 'edit'])->name('facility.edit');
+	Route::put('/facility/{id}', [FacilityController::class, 'update'])->name('facility.update');
+	Route::get('/facility/{id}/delete', [FacilityController::class, 'delete'])->name('facility.delete');
+
+
+    // Route::get('/facility', [FacilityController::class, 'index'])->name('facility');
+	// Route::get('/facility/create', [FacilityController::class, 'create'])->name('facility.create');
+	// Route::post('/facility/store', [FacilityController::class, 'store'])->name('facility.store');
+	// Route::get('/facility/edit/{id}', [FacilityController::class, 'edit'])->name('facility.edit');
+	// Route::put('/facility/update/{id}', [FacilityController::class, 'update'])->name('facility.update');
+	// Route::get('/facility/delete/{id}', [FacilityController::class, 'destroy'])->name('facility.delete');
     //Booking
-    Route::get('/booking', [BookingController::class, 'index'])->name('booking');
-	Route::get('/booking/delete/{id}', [BookingController::class, 'destroy'])->name('booking.delete');
+    Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+	Route::get('/booking/{id}/delete', [BookingController::class, 'delete'])->name('booking.delete');
 });

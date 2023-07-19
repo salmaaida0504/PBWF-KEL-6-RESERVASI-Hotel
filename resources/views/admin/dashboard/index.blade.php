@@ -17,11 +17,10 @@
         </div>
         <div class="col-md-4 p-0 px-1">
             <div class="card p-3">
-                <h5>Avalaible</h5>
-                <h5>{{ $avalaible }}</h5>
+                <h5>Available</h5>
+                <h5>{{ $available }}</h5>
             </div>
         </div>
     </div>
-    
 </div>
 @endsection
