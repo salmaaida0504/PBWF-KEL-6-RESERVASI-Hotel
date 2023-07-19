@@ -37,7 +37,8 @@
 <div class="row">
 	@foreach($room as $r)
 	<div class="card shadow p-0 col-4 my-3">
-		<img src="{{ asset('img/'.$r->image) }}" width="100%" height="230">
+	<img src="https://blog.bookingtogo.com/wp-content/uploads/2021/12/jenis-jenis-kamar-hotel.jpg" width="100%" height="400">
+		<!-- <img src="{{ asset('img/'.$r->image) }}" width="100%" height="230"> -->
 		<div class="form-inline p-3">
 			<span class="btn btn-sm mr-1 btn-outline-primary">{{ $r->quantity }} Person</span>
 			<span class="btn btn-sm mr-1 btn-outline-primary">{{ $r->type }} Room</span>

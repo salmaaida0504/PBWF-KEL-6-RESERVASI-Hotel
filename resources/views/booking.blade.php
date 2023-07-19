@@ -5,7 +5,9 @@
 <section class="py-5 my-5 bg-white">
 <div class="container">
 	<div class="card shadow p-0 col-8 my-3">
-		<img src="{{ asset('img/'.$room->image) }}" width="100%" height="400">
+		<img src="https://blog.bookingtogo.com/wp-content/uploads/2021/12/jenis-jenis-kamar-hotel.jpg" width="100%" height="400">
+
+		<!-- <img src="{{ asset('img/'.$room->image) }}" width="100%" height="400"> -->
 		<div class="form-inline p-3">
 			<span class="btn btn-sm mr-1 btn-outline-primary">{{ $room->quantity }} Person</span>
 			<span class="btn btn-sm mr-1 btn-outline-primary">{{ $room->type }} Room</span>

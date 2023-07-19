@@ -9,8 +9,8 @@
 
                 <div class="card-body">
                         <div class="alert alert-info" role="alert">
-                            Name : Aimar Yudhistira<br>
-                            Rekening BNI : 82823-13972-391-3
+                            Name : Salma Aida Yasmi<br>
+                            Rekening BNI : 1234-567-876
                         </div>
 
                     <div class="table-responsive">
