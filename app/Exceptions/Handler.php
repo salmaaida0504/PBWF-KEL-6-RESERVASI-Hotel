@@ -12,6 +12,10 @@ class Handler extends ExceptionHandler
      *
      * @var array<int, string>
      */
+    protected $dontReport = [
+        //
+    ];
+    
     protected $dontFlash = [
         'current_password',
         'password',

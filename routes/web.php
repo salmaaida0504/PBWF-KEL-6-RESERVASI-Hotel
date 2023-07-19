@@ -34,7 +34,7 @@ Route::get('/delete/{id}', [HomeController::class, 'destroy'])->name('home.delet
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Admin page
 Route::prefix('/admin')->middleware(['auth', 'cekrole:admin'])->group(function(){

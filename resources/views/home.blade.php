@@ -1,32 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <section id="jumbotron" class="w-100 bg-primary py-5">
 <div class="container py-5 text-white my-5">
     <div class="col p-0 m-0" style="max-width:470px">
-        <h2 style="line-height:1.5em">Make your night more wonderful with RestHotel</h2>
+        <h2 style="line-height:1.5em">Visit Paradise Here With SQ Hotel</h2>
+		<h2 style="line-height:1.5em">We Respect Your Living</h2>
         <p class="my-4">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+		Selamat datang di Hotel Blue Horizon!
+		Hotel Blue Horizon adalah destinasi pilihan untuk menginap yang menggabungkan kenyamanan dan keindahan. Terletak di jantung kota, 
+		hotel kami menawarkan akses mudah ke tempat-tempat wisata terkenal, restoran, dan pusat perbelanjaan.
         </p>
         <a class="btn bg-white text-primary" href="#room">Get Started</a>
     </div>
@@ -37,8 +21,7 @@
 <div class="row">
 	@foreach($room as $r)
 	<div class="card shadow p-0 col-4 my-3">
-	<img src="https://blog.bookingtogo.com/wp-content/uploads/2021/12/jenis-jenis-kamar-hotel.jpg" width="100%" height="400">
-		<!-- <img src="{{ asset('img/'.$r->image) }}" width="100%" height="230"> -->
+		<img src="{{ asset('img/'.$r->image) }}" width="100%" height="230">
 		<div class="form-inline p-3">
 			<span class="btn btn-sm mr-1 btn-outline-primary">{{ $r->quantity }} Person</span>
 			<span class="btn btn-sm mr-1 btn-outline-primary">{{ $r->type }} Room</span>
@@ -64,4 +47,5 @@
 </div>
 </div>
 </section>
+
 @endsection

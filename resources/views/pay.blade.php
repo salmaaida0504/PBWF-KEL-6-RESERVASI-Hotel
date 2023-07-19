@@ -10,7 +10,7 @@
                 <div class="card-body">
                         <div class="alert alert-info" role="alert">
                             Name : Salma Aida Yasmi<br>
-                            Rekening BNI : 1234-567-876
+                            Rekening BNI : 12345-53452-9876
                         </div>
 
                     <div class="table-responsive">
