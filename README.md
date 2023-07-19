@@ -9,6 +9,7 @@
 <p align="left">
 Maaf pak nasrul kami, belum bisa menyelesaikan website ini dengan sempurna, kami masih belum paham sepenuhnya tentang pembuatan website dan salah kami juga menyelesaikan website ini sangat mepet deadline pengumpulan. Untuk pembagian tugas kelompok kami sudah cukup merata.
 </p>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
