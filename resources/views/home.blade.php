@@ -8,8 +8,8 @@
             <h2 style="line-height:1.5em">Visit Paradise Here With SQ Hotel</h2>
             <h2 style="line-height:1.5em">We Respect Your Living</h2>
             <p class="my-4">
-                Selamat datang di Hotel Blue Horizon!
-                Hotel Blue Horizon adalah destinasi pilihan untuk menginap yang menggabungkan kenyamanan dan keindahan. Terletak di jantung kota,
+                Selamat datang di SQ Hotel!
+                SQ Hotel adalah destinasi pilihan untuk menginap yang menggabungkan kenyamanan dan keindahan. Terletak di jantung kota,
                 hotel kami menawarkan akses mudah ke tempat-tempat wisata terkenal, restoran, dan pusat perbelanjaan.
             </p>
             <a class="btn bg-white text-primary" href="#room">Get Started</a>

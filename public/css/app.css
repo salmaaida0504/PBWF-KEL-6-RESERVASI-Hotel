@@ -51,7 +51,7 @@
   }
   
   article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
-    display: block;
+    display: flex;
   }
   
   body {
@@ -155,7 +155,7 @@
   }
   
   a {
-    color: #3490dc;
+    color: #024275;
     text-decoration: none;
     background-color: transparent;
   }
