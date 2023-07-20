@@ -31,7 +31,11 @@
                                 <td class="pt-3">{{ $room->name }}</td>
                                 <td>
                                     <a class="btn btn-success mr-2" href="{{ route('room.edit', $room->id) }}">Edit</a>
-                                    <a class="btn btn-danger" href="{{ route('room.delete', $room->id) }}">Delete</a>
+                                    <form action="{{ route('room.delete', ['room' => $room->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

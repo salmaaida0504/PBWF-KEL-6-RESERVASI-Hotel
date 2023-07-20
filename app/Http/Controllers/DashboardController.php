@@ -20,8 +20,7 @@ class DashboardController extends Controller
         return view('admin.dashboard.index', compact('roomCount', 'bookedCount', 'availableCount', 'availableRooms'));
     }
 
-    public function index()
-    {
+    public function index(){
         $date = now()->format('Y-m-d H:i:s');
         $roomCount = Room::count();
         $bookedCount = Booking::where('check_out', '>=', $date)->count();
@@ -30,17 +29,14 @@ class DashboardController extends Controller
         return view('admin.dashboard.index', compact('roomCount', 'bookedCount', 'availableCount'));
     }
 
-    public function create()
-    {
+    public function create(){
         return view('admin.dashboard.create');
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $data = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            // Tambahkan validasi lainnya sesuai kebutuhan
         ]);
 
         $room = Room::create($data);
@@ -48,8 +44,7 @@ class DashboardController extends Controller
         return redirect()->route('admin.dashboard.index')->with('success', 'Room created successfully.');
     }
 
-    public function show($id)
-    {
+    public function show($id){
         $room = Room::find($id);
 
         if (!$room) {
@@ -59,8 +54,7 @@ class DashboardController extends Controller
         return view('admin.dashboard.show', compact('room'));
     }
 
-    public function edit($id)
-    {
+    public function edit($id){
         $room = Room::find($id);
 
         if (!$room) {
@@ -70,8 +64,7 @@ class DashboardController extends Controller
         return view('admin.dashboard.edit', compact('room'));
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $room = Room::find($id);
 
         if (!$room) {
@@ -81,7 +74,6 @@ class DashboardController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'description' => 'required',
-            // Tambahkan validasi lainnya sesuai kebutuhan
         ]);
 
         $room->update($data);
@@ -89,8 +81,7 @@ class DashboardController extends Controller
         return redirect()->route('admin.dashboard.index')->with('success', 'Room updated successfully.');
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id){
         $room = Room::find($id);
 
         if (!$room) {

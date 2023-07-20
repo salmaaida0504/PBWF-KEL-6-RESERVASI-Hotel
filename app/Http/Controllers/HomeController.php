@@ -11,19 +11,16 @@ use Auth;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index()
-    {
+    public function index(){
         $room = Room::latest()->get();
         return view('home', compact('room'));
     }
 
-    public function create($slug)
-    {
+    public function create($slug){
         $room = Room::where('slug', $slug)->first();
         $booking = Booking::orderBy('created_at', 'DESC')->where('room_id', $room->id)->first();
         $count = Booking::orderBy('created_at', 'DESC')->where('room_id', $room->id)->count();
@@ -31,8 +28,7 @@ class HomeController extends Controller
         return view('booking', compact('room', 'booking', 'count', 'feature'));
     }
 
-    public function store(Request $request, $id)
-    {
+    public function store(Request $request, $id){
         $crud = Booking::create([
             'user_id' => Auth::user()->id,
             'room_id' => $id,

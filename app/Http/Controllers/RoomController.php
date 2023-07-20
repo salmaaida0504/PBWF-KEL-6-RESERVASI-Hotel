@@ -11,12 +11,9 @@ use Illuminate\Support\Str;
 class RoomController extends Controller
 {
 
-    private function generateSlug($name)
-    {
-        // Gunakan method slug() dari class Str untuk membuat slug dari nama
+    private function generateSlug($name){
         $slug = Str::slug($name, '-');
         
-        // Cek apakah slug sudah ada dalam database, jika ya, tambahkan angka di belakangnya
         $count = 1;
         while (Room::where('slug', $slug)->exists()) {
             $slug = Str::slug($name, '-') . '-' . $count;
@@ -27,11 +24,8 @@ class RoomController extends Controller
     }
 
     public function index(){
-        $rooms = Room::all(); // Mengambil semua data kamar dari tabel "rooms"
+        $rooms = Room::all(); 
         return view('admin.room.index', compact('rooms'));
-        
-        // $room = Room::latest()->get();
-        // return view('admin.room.index', compact('room'))->with('i');
     }
 
     public function create(){
@@ -108,44 +102,41 @@ class RoomController extends Controller
 
     public function edit($id){
         $room = Room::findOrFail($id);
-    $facilities = Facility::all();
+        $facilities = Facility::all();
 
-    // Periksa apakah $room memiliki relasi dengan features sebelum menggunakan pluck()
-    $selectedFacilities = $room->features ? $room->features->pluck('facility_id')->toArray() : [];
+        $selectedFacilities = $room->features ? $room->features->pluck('facility_id')->toArray() : [];
 
-    return view('admin.room.edit', compact('room', 'facilities', 'selectedFacilities'));
+        return view('admin.room.edit', compact('room', 'facilities', 'selectedFacilities'));
     }
 
-    public function update(Request $request, $id)
-{
-    $slug = str_replace(' ', '-', strtolower($request->name));
-    $room = Room::findOrFail($id);
+    public function update(Request $request, $id){
+        $slug = str_replace(' ', '-', strtolower($request->name));
+        $room = Room::findOrFail($id);
 
-    try {
-        if ($request->hasFile('image')) {
-            $img = $request->file('image');
-            $image = $img->getClientOriginalName();
-            $img->move(public_path('/img'), $image);
+        try {
+            if ($request->hasFile('image')) {
+                $img = $request->file('image');
+                $image = $img->getClientOriginalName();
+                $img->move(public_path('/img'), $image);
 
-            $crud = $room->update([
-                'name' => $request->name,
-                'image' => $image,
-                'price' => $request->price,
-                'quantity' => $request->quantity,
-                'type' => $request->type,
-                'class' => $request->class,
-            ]);
-        } else {
-            $crud = $room->update([
-                'name' => $request->name,
-                'price' => $request->price,
-                'quantity' => $request->quantity,
-                'type' => $request->type,
-                'class' => $request->class,
-            ]);
-        }
+                $crud = $room->update([
+                    'name' => $request->name,
+                    'image' => $image,
+                    'price' => $request->price,
+                    'quantity' => $request->quantity,
+                    'type' => $request->type,
+                    'class' => $request->class,
+                ]);
+            } else {
+                $crud = $room->update([
+                    'name' => $request->name,
+                    'price' => $request->price,
+                    'quantity' => $request->quantity,
+                    'type' => $request->type,
+                    'class' => $request->class,
+                ]);
+            }
 
-        // Inisialisasi $crud2 sebelum loop dimulai
         $crud2 = true;
 
         $fac = Facility::orderBy('name', 'ASC')->get();
@@ -173,126 +164,18 @@ class RoomController extends Controller
             return redirect()->back()->with('status', 'Failed to update room features.');
         }
     } catch (QueryException $e) {
-        // Handle database query exception, if any
         return redirect()->back()->with('status', 'Failed to update room. Please check your input.');
     }
 }
 
-    // public function update(Request $request, $id){
-    //     $slug = str_replace(' ', '-', strtolower($request->name));
-    //     $room = Room::findOrFail($id);
-    //     if ($request->hasFile('image')) {
-    //         $img = $request->file('image');
-    //         $image = $img->getClientOriginalName();
-    //         $img->move(public_path('/img'), $image);
-    
-    //         $crud = $room->update([
-    //             'name' => $request->name,
-    //             'image' => $image,
-    //             'price' => $request->price,
-    //             'quantity' => $request->quantity,
-    //             'type' => $request->type,
-    //             'class' => $request->class,
-    //         ]);
-    //     } else {
-    //         $crud = $room->update([
-    //             'name' => $request->name,
-    //             'price' => $request->price,
-    //             'quantity' => $request->quantity,
-    //             'type' => $request->type,
-    //             'class' => $request->class,
-    //         ]);
-    //     }
-    
-    //     // Inisialisasi $crud2 sebelum loop dimulai
-    //     $crud2 = true;
-    
-    //     $fac = Facility::orderBy('name', 'ASC')->get();
-    //     $count = $fac->count();
-    
-    //     $i = 1;
-    
-    //     foreach ($fac as $f) { 
-    //         $feature = Feature::where('room_id', $id)->where('facility_id', $request->input('facility_id'.$i));
-    //         if ($request->input('facility_id'.$i) == null) {
-    //             $crud2 = $feature->update([
-    //                 'status' => 0,
-    //             ]);
-    //         } else {
-    //             $crud2 = $feature->update([
-    //                 'status' => 1,
-    //             ]);
-    //         }
-    //         $i++;
-    //     }
-    
-    //     if ($crud2) {
-    //         return redirect()->route('room')->with('status', 'Success');
-    //     } else {
-    //         return redirect()->back()->with('status', 'Failed');
-    //     }
-    // }
-    
-
-    // public function update(Request $request, $id){
-    //     $slug = str_replace(' ', '-', strtolower($request->name));
-    //     $room = Room::findOrFail($id);
-    //     if ($request->hasFile('image')) {
-    //         $img = $request->file('image');
-    //         $image = $img->getClientOriginalName();
-    //         $img->move(public_path('/img'), $image);
-
-    //     $crud = $room->update([
-    //         'name' => $request->name,
-    //         'image' => $image,
-    //         'price' => $request->price,
-    //         'quantity' => $request->quantity,
-    //         'type' => $request->type,
-    //         'class' => $request->class,
-    //     ]);
-    //     } else {
-    //         $crud = $room->update([
-    //             'name' => $request->name,
-    //             'price' => $request->price,
-    //             'quantity' => $request->quantity,
-    //             'type' => $request->type,
-    //             'class' => $request->class,
-    //         ]);
-    //     }
-
-    //     $fac = Facility::orderBy('name', 'ASC')->get();
-    //     $count = $fac->count();
-
-    //     $i = 1;
-
-    //     foreach ($fac as $f) { 
-    //         $feature = Feature::where('room_id', $id)->where('facility_id', $request->input('facility_id'.$i));
-    //         if ($request->input('facility_id'.$i) == null) {
-    //             $crud2 = $feature->update([
-    //                 'status' => 0,
-    //             ]);
-    //         } else {
-    //             $crud2 = $feature->update([
-    //                 'status' => 1,
-    //             ]);
-    //         }
-    //         $i++;
-    //     }
-
-    //     if ($crud2) {
-    //         return redirect()->route('room')->with('status', 'Success');
-    //     } else {
-    //         return redirect()->back()->with('status', 'Failed');
-    //     }
-    // }
-
     public function destroy($id){
         $room = Room::findOrFail($id);
-    $feature = Feature::where('room_id', $id);
-    $feature->delete();
-    $room->delete();
 
-    return redirect()->route('room.index')->with('status', 'Room deleted successfully.');
+        $room->features()->delete();
+
+        $room->delete();
+
+        return redirect()->route('room.create')->with('status', 'Success');
+
     }
-
 }
