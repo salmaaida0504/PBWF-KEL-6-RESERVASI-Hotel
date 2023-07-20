@@ -14,9 +14,9 @@
                         </div>
                     @endif
 
-                    <form method="post" action="{{ route('facility.update', $facility->id) }}">
+                    <form action="{{ route('admin.facility.update', $facility->id) }}" method="POST">
                         @csrf
-                        @method('PUT')
+                        @method('POST')
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" name="name" id="name" class="form-control" value="{{ $facility->name }}">

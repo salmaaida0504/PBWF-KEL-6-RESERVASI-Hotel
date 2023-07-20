@@ -18,25 +18,28 @@
                     @endif
 
                     <div class="table-responsive">
-                        <table class="table">
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Action</th>
-                            </tr>
-                            @foreach($facilities as $facility)
-                            <tr>
-                                <td class="pt-3">{{ ++$loop->index }}</td>
-                                <td class="pt-3">{{ $facility->name }}</td>
-                                <td>
-                                    <a class="btn btn-success mr-2" href="{{ route('facility.edit', $facility->id) }}">Edit</a>
-                                    <a class="btn btn-danger" href="{{ route('facility.delete', $facility->id) }}">Delete</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </table>
-                    </div>
-
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        @foreach($facilities as $facility)
+        <tr>
+            <td class="pt-3">{{ $loop->index + 1 }}</td>
+            <td class="pt-3">{{ $facility->name }}</td>
+            <td>
+                <a class="btn btn-success mr-2" href="{{ route('facility.edit', $facility->id) }}">Edit</a>
+                <form action="{{ route('facility.destroy', $facility->id) }}" method="POST" style="display: inline-block;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this facility?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+        </table>
+</div>
                 </div>
             </div>
         </div>

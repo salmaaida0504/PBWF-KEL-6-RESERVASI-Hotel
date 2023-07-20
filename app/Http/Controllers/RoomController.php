@@ -288,13 +288,11 @@ class RoomController extends Controller
 
     public function destroy($id){
         $room = Room::findOrFail($id);
-        $feature = Feature::where('room_id', $id);
-        $crud = $feature->delete();
-        $crud2 = $room->delete();
-        
-        if ($crud2) {
-            return redirect()->route('room')->with('status', 'Success');
-        }
+    $feature = Feature::where('room_id', $id);
+    $feature->delete();
+    $room->delete();
+
+    return redirect()->route('room.index')->with('status', 'Room deleted successfully.');
     }
 
 }

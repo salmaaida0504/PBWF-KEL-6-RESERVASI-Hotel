@@ -6,6 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\BookingController;
+//use App\Http\Controllers\Admin\FacilityController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,26 +38,27 @@ Auth::routes();
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Admin page
-//Route::prefix('admin')->group(function(){
+//Route::prefix('/admin')->group(function(){
     //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
     //Room
 	Route::get('/room', [RoomController::class, 'index'])->name('room.index');
-Route::get('/room/create', [RoomController::class, 'create'])->name('room.create');
-Route::post('/room', [RoomController::class, 'store'])->name('room.store');
-Route::get('/room/{room}/edit', [RoomController::class, 'edit'])->name('room.edit');
-Route::put('/room/{room}', [RoomController::class, 'update'])->name('room.update');
-Route::delete('/room/{room}', [RoomController::class, 'destroy'])->name('room.delete');
-Route::get('/room/{room}', [RoomController::class, 'show'])->name('room.show');
+	Route::get('/room/create', [RoomController::class, 'create'])->name('room.create');
+	Route::post('/room', [RoomController::class, 'store'])->name('room.store');
+	Route::get('/room/{room}/edit', [RoomController::class, 'edit'])->name('room.edit');
+	Route::put('/room/{room}', [RoomController::class, 'update'])->name('room.update');
+	Route::delete('/room/{room}', [RoomController::class, 'destroy'])->name('room.delete');
+	Route::get('/room/{room}', [RoomController::class, 'show'])->name('room.show');
 
 
     //Facility
-	Route::get('/facility', [FacilityController::class, 'index'])->name('facility.index');
-	Route::get('/facility/create', [FacilityController::class, 'create'])->name('facility.create');
-	Route::post('/facility', [FacilityController::class, 'store'])->name('facility.store');
-	Route::get('/facility/{id}/edit', [FacilityController::class, 'edit'])->name('facility.edit');
-	Route::put('/facility/{id}', [FacilityController::class, 'update'])->name('facility.update');
-	Route::get('/facility/{id}/delete', [FacilityController::class, 'delete'])->name('facility.delete');
+	Route::get('/admin/facility', [FacilityController::class, 'index'])->name('facility.index');
+	Route::get('/admin/facility/create', [FacilityController::class, 'create'])->name('facility.create');
+	Route::post('/admin/facility', [FacilityController::class, 'store'])->name('facility.store');
+	Route::get('/admin/facility/{id}/edit', [FacilityController::class, 'edit'])->name('facility.edit');
+	Route::post('/admin/facility/{id}', 'FacilityController@update')->name('admin.facility.update');
+	Route::delete('/admin/facility/{id}', [FacilityController::class, 'destroy'])->name('facility.destroy');
+	Route::get('/facility/{facility}', [RoomController::class, 'show'])->name('facility.show');
 
     //Booking
     Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');

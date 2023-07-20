@@ -8,6 +8,18 @@ use App\Models\Booking;
 
 class DashboardController extends Controller
 {
+
+    public function dashboard(){
+        $date = now()->format('Y-m-d H:i:s');
+        $roomCount = Room::count();
+        $bookedCount = Booking::where('check_out', '>=', $date)->count();
+        $availableCount = Booking::where('check_out', '<', $date)->count();
+
+        $availableRooms = Room::where('quantity', '>', 0)->get();
+
+        return view('admin.dashboard.index', compact('roomCount', 'bookedCount', 'availableCount', 'availableRooms'));
+    }
+
     public function index()
     {
         $date = now()->format('Y-m-d H:i:s');
