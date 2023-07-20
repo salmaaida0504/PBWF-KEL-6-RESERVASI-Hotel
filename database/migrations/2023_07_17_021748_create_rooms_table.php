@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('quantity');
             $table->string('type');
-            $table->string('class', 1);
+            $table->string('class', 255)->change();
             $table->timestamps();
         });
     }

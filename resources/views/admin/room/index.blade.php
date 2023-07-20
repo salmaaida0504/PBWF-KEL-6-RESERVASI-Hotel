@@ -5,14 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><h5 class="float-left pt-2">Rooms Management</h5> <a class="btn btn-primary float-right" href="{{ route('room.create') }}">New Room</a></div>
+                <div class="card-header">Room List</div>
 
                 <div class="card-body">
+
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
-                    @endif                    
+                    @endif
 
                     <div class="table-responsive">
                         <table class="table">
@@ -21,6 +22,9 @@
                                 <th>Name</th>
                                 <th>Action</th>
                             </tr>
+                            @php
+                                $i = 0; // Inisialisasi variabel $i
+                            @endphp
                             @foreach($rooms as $room)
                             <tr>
                                 <td class="pt-3">{{ ++$i }}</td>
@@ -33,7 +37,6 @@
                             @endforeach
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>

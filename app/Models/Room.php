@@ -12,6 +12,10 @@ class Room extends Model
 
     protected $fillable = ['name', 'slug', 'price', 'image', 'quantity', 'type', 'class'];
 
+    protected $attributes = [
+        'class' => 'default_class_value',
+    ];
+
     public function booking(){
         return $this->hasMany(Booking::class);
     }

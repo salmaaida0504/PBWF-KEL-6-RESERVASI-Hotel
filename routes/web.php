@@ -31,31 +31,24 @@ Route::get('/myroom', [HomeController::class, 'myroom'])->name('home.myroom')->m
 Route::get('/pay/{id}', [HomeController::class, 'pay'])->name('home.pay')->middleware(['auth', 'cekrole:user']);
 Route::get('/delete/{id}', [HomeController::class, 'destroy'])->name('home.delete')->middleware(['auth', 'cekrole:user']);
 
-
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Admin page
-Route::prefix('/admin')->middleware(['auth', 'cekrole:admin'])->group(function(){
+//Route::prefix('admin')->group(function(){
     //Dashboard
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
     //Room
 	Route::get('/room', [RoomController::class, 'index'])->name('room.index');
-	Route::get('/room/create', [RoomController::class, 'create'])->name('room.create');
-	Route::post('/room', [RoomController::class, 'store'])->name('room.store');
-	Route::get('/room/{id}/edit', [RoomController::class, 'edit'])->name('room.edit');
-	Route::put('/room/{id}', [RoomController::class, 'update'])->name('room.update');
-	Route::delete('/room/{id}', [RoomController::class, 'destroy'])->name('room.delete');
+Route::get('/room/create', [RoomController::class, 'create'])->name('room.create');
+Route::post('/room', [RoomController::class, 'store'])->name('room.store');
+Route::get('/room/{room}/edit', [RoomController::class, 'edit'])->name('room.edit');
+Route::put('/room/{room}', [RoomController::class, 'update'])->name('room.update');
+Route::delete('/room/{room}', [RoomController::class, 'destroy'])->name('room.delete');
+Route::get('/room/{room}', [RoomController::class, 'show'])->name('room.show');
 
 
-
-    // Route::get('/room', [RoomController::class, 'index'])->name('room');
-	// Route::get('/room/create', [RoomController::class, 'create'])->name('room.create');
-	// Route::post('/room/store', [RoomController::class, 'store'])->name('room.store');
-	// Route::get('/room/edit/{id}', [RoomController::class, 'edit'])->name('room.edit');
-	// Route::put('/room/update/{id}', [RoomController::class, 'update'])->name('room.update');
-	// Route::get('/room/delete/{id}', [RoomController::class, 'destroy'])->name('room.delete');
     //Facility
 	Route::get('/facility', [FacilityController::class, 'index'])->name('facility.index');
 	Route::get('/facility/create', [FacilityController::class, 'create'])->name('facility.create');
@@ -64,14 +57,7 @@ Route::prefix('/admin')->middleware(['auth', 'cekrole:admin'])->group(function()
 	Route::put('/facility/{id}', [FacilityController::class, 'update'])->name('facility.update');
 	Route::get('/facility/{id}/delete', [FacilityController::class, 'delete'])->name('facility.delete');
 
-
-    // Route::get('/facility', [FacilityController::class, 'index'])->name('facility');
-	// Route::get('/facility/create', [FacilityController::class, 'create'])->name('facility.create');
-	// Route::post('/facility/store', [FacilityController::class, 'store'])->name('facility.store');
-	// Route::get('/facility/edit/{id}', [FacilityController::class, 'edit'])->name('facility.edit');
-	// Route::put('/facility/update/{id}', [FacilityController::class, 'update'])->name('facility.update');
-	// Route::get('/facility/delete/{id}', [FacilityController::class, 'destroy'])->name('facility.delete');
     //Booking
     Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 	Route::get('/booking/{id}/delete', [BookingController::class, 'delete'])->name('booking.delete');
-});
+//});
