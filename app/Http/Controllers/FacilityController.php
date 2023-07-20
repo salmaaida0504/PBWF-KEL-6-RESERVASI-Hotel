@@ -34,7 +34,7 @@ class FacilityController extends Controller
 
     public function edit($id){
         $facility = Facility::findOrFail($id);
-        return view('edit_facility', compact('facility'));
+        return view('admin.facility.edit', compact('facility'));
     }
     
     public function update(Request $request, $id){
